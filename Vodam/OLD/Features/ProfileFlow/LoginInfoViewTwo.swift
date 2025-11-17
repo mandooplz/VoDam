@@ -8,7 +8,7 @@ import SwiftUI
 
 
 // MARK: 
-struct LoginInfoView: View {
+struct LoginInfoViewTwo: View {
     let onLoginButtonTapped: () -> Void
     let onCancelButtonTapped: () -> Void
 

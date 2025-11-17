@@ -34,8 +34,8 @@ struct VoDam {
                 state.loginInfo = .init()
                 return .none
             case .loginInfo(.presented(.goToLogin)):
+                state.loginForm = .init()
                 state.loginInfo = nil
-                state.loginInfo = .init()
                 return .none
             case .loginInfo(.presented(.closeInfo)):
                 state.loginInfo = nil

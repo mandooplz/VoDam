@@ -20,6 +20,8 @@ struct LoginForm {
     
     // MARK: action
     enum Action {
-        
+        case appleTapped
+        case googleTapped
+        case kakaoTapped
     }
 }
