@@ -54,8 +54,20 @@ struct VoDamView: View {
                 action: \.destination.loginInfo)) { store in
                 LoginInfoView(store: store)
                     .presentationDetents([.fraction(0.4)])
-                    .presentationDragIndicator(.visible)
+                        .presentationDragIndicator(.visible)
             }
         }
     }
+}
+
+
+
+// MARK: Preview
+#Preview {
+    VoDamView(
+        store: Store(
+            initialState: VoDam.State(),
+            reducer: { VoDam() }
+        )
+    )
 }
