@@ -26,14 +26,12 @@ struct LoginInfo {
     // MARK: action
     enum Action {
         case goToLogin
+        case closeInfo
     }
     
     var body: some Reducer<State, Action> {
         Reduce { state, action in
-            switch action {
-            case .goToLogin:
-                return .none
-            }
+            return .none
         }
     }
 }

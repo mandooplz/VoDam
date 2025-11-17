@@ -31,11 +31,22 @@ struct VoDam {
         Reduce { state, action in
             switch action {
             case .showLoginInfo:
-                state.loginForm = .init()
+                state.loginInfo = .init()
+                return .none
+            case .loginInfo(.presented(.goToLogin)):
+                state.loginInfo = nil
+                state.loginInfo = .init()
+                return .none
+            case .loginInfo(.presented(.closeInfo)):
+                state.loginInfo = nil
                 return .none
             default:
                 return .none
             }
+        }.ifLet(\.$loginInfo, action: \.loginInfo) {
+            LoginInfo()
+        }.ifLet(\.$loginForm, action: \.loginForm) {
+            LogInForm()
         }
     }
 }

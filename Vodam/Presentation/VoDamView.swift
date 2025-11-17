@@ -1,8 +1,60 @@
+////
+////  VoDamView.swift
+////  Vodam
+////
+////  Created by 김민우 on 11/17/25.
+////
+//import SwiftUI
+//import ComposableArchitecture
 //
-//  VoDamView.swift
-//  Vodam
 //
-//  Created by 김민우 on 11/17/25.
+//// MARK: view
+//struct VoDamView: View {
+//    // MARK: model
+//    @State var store: StoreOf<VoDam>
+//    
+//    
+//    // MARK: body
+//    var body: some View {
+//        VStack {
+//            Spacer()
 //
-import SwiftUI
-import ComposableArchitecture
+//            Text("여기에 메인 UI 들어갈 예정")
+//                .font(.title3)
+//                .foregroundStyle(.secondary)
+//
+//            Spacer()
+//        }
+//        .navigationTitle("새 프로젝트 생성")
+//        .toolbar {
+//            ToolbarItem(placement: .navigationBarTrailing) {
+//                Button {
+//                    store.send(.showLoginInfo)
+//                } label: {
+//                    Image(systemName: "person.circle")
+//                        .imageScale(.large)
+//                }
+//            }
+//        }
+//        
+//        // navigationDestination
+//        .navigationDestination(
+//            item: $store.scope(
+//                state: \.destination?.loginProvider,
+//                action: \.destionation.loginProvider),
+//            destination: { store in
+//                LoginProvidersView(store: store)
+//            })
+//        
+//        // sheet
+//        .sheet(
+//            item: $store.scope(
+//                state: \.destination?.profile,
+//                action: \.destionation.profile)
+//        ) { profileStore in
+//            ProfileFlowView(store: profileStore)
+//                .presentationDetents([.fraction(0.4)])
+//                .presentationDragIndicator(.visible)
+//        }
+//    }
+//}
