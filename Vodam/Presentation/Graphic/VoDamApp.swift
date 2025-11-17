@@ -5,8 +5,6 @@ import ComposableArchitecture
 struct VodamApp: App {
     var body: some Scene {
         WindowGroup {
-//            ContentView()
-            
             VoDamView(
                 store: Store(
                     initialState: VoDam.State(),
@@ -15,15 +13,6 @@ struct VodamApp: App {
                     }
                 )
             )
-            
-//            AppView(
-//                store: Store(
-//                    initialState: AppFeature.State(),
-//                    reducer: {
-//                        AppFeature()
-//                    }
-//                )
-//            )
         }
     }
 }
