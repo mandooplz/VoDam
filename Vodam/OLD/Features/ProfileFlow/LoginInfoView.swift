@@ -4,9 +4,10 @@
 //
 //  Created by 송영민 on 11/17/25.
 //
-
 import SwiftUI
 
+
+// MARK: 
 struct LoginInfoView: View {
     let onLoginButtonTapped: () -> Void
     let onCancelButtonTapped: () -> Void

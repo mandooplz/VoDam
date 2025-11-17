@@ -12,7 +12,7 @@ import SwiftUI
 struct MainView: View {
     // MARK: model
     @State var store: StoreOf<MainFeature>
-
+    
     
     // MARK: body
     var body: some View {
@@ -37,15 +37,20 @@ struct MainView: View {
             }
         }
         
+        // navigationDestination
         .navigationDestination(
-            item: $store.scope(state: \.destination?.loginProvider, action: \.destionation.loginProvider),
+            item: $store.scope(
+                state: \.destination?.loginProvider,
+                action: \.destionation.loginProvider),
             destination: { store in
                 LoginProvidersView(store: store)
             })
         
-        // 로그인 유도 sheet
+        // sheet
         .sheet(
-            item: $store.scope(state: \.destination?.profile, action: \.destionation.profile)
+            item: $store.scope(
+                state: \.destination?.profile,
+                action: \.destionation.profile)
         ) { profileStore in
             ProfileFlowView(store: profileStore)
                 .presentationDetents([.fraction(0.4)])
