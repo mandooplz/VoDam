@@ -14,16 +14,19 @@ struct VoDam {
     // MARK: state
     @ObservableState
     struct State {
-        @Presents var loginInfo: LoginInfo.State?
-        @Presents var loginForm: LoginForm.State?
+        @Presents var destination: Destination.State?
+    }
+    
+    @Reducer
+    enum Destination {
+        case loginInfo(LoginInfo)
+        case loginForm(LoginForm)
     }
     
     
     // MARK: action
     enum Action {
-        case loginInfo(PresentationAction<LoginInfo.Action>)
-        case loginForm(PresentationAction<LoginForm.Action>)
-        
+        case destination(PresentationAction<Destination.Action>)
         case showLoginInfo
     }
     
@@ -31,23 +34,18 @@ struct VoDam {
         Reduce { state, action in
             switch action {
             case .showLoginInfo:
-                state.loginInfo = .init()
+                state.destination = .loginInfo(.init())
                 return .none
-            case .loginInfo(.presented(.goToLogin)):
-                state.loginForm = .init()
-                state.loginInfo = nil
+            case .destination(.presented(.loginInfo(.goToLogin))):
+                state.destination = .loginForm(.init())
                 return .none
-            case .loginInfo(.presented(.closeInfo)):
-                state.loginInfo = nil
+            case .destination(.presented(.loginInfo(.closeInfo))):
+                state.destination = nil
                 return .none
             default:
                 return .none
             }
-        }.ifLet(\.$loginInfo, action: \.loginInfo) {
-            LoginInfo()
-        }.ifLet(\.$loginForm, action: \.loginForm) {
-            LoginForm()
-        }
+        }.ifLet(\.$destination, action: \.destination)
     }
 }
 

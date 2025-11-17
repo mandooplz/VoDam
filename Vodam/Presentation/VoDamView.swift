@@ -40,14 +40,18 @@ struct VoDamView: View {
             
             // navigationDestination
             .navigationDestination(
-                store: store.scope(state: \.$loginForm,
-                                   action: \.loginForm), destination: { store in
-                                       LoginFormView(store: store)
-                                   })
+                item: $store.scope(
+                    state: \.destination?.loginForm,
+                action: \.destination.loginForm),
+                destination: { store in
+                       LoginFormView(store: store)
+                   })
             
             
             // sheet
-            .sheet(store: store.scope(state: \.$loginInfo, action: \.loginInfo)) { store in
+            .sheet(item: $store.scope(
+                state: \.destination?.loginInfo,
+                action: \.destination.loginInfo)) { store in
                 LoginInfoView(store: store)
                     .presentationDetents([.fraction(0.4)])
                     .presentationDragIndicator(.visible)
