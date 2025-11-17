@@ -7,15 +7,23 @@ struct VodamApp: App {
         WindowGroup {
 //            ContentView()
             
-//            VoDamView(store: Store(initialState: VoDam.State(), reducer: { VoDam() } ))
-            AppView(
+            VoDamView(
                 store: Store(
-                    initialState: AppFeature.State(),
+                    initialState: VoDam.State(),
                     reducer: {
-                        AppFeature()
+                        VoDam()
                     }
                 )
             )
+            
+//            AppView(
+//                store: Store(
+//                    initialState: AppFeature.State(),
+//                    reducer: {
+//                        AppFeature()
+//                    }
+//                )
+//            )
         }
     }
 }
