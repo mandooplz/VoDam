@@ -15,14 +15,14 @@ struct VoDam {
     @ObservableState
     struct State {
         @Presents var loginInfo: LoginInfo.State?
-        @Presents var loginForm: LogInForm.State?
+        @Presents var loginForm: LoginForm.State?
     }
     
     
     // MARK: action
     enum Action {
         case loginInfo(PresentationAction<LoginInfo.Action>)
-        case loginForm(PresentationAction<LogInForm.Action>)
+        case loginForm(PresentationAction<LoginForm.Action>)
         
         case showLoginInfo
     }
@@ -46,7 +46,7 @@ struct VoDam {
         }.ifLet(\.$loginInfo, action: \.loginInfo) {
             LoginInfo()
         }.ifLet(\.$loginForm, action: \.loginForm) {
-            LogInForm()
+            LoginForm()
         }
     }
 }

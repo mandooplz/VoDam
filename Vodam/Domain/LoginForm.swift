@@ -10,7 +10,7 @@ import ComposableArchitecture
 
 // MARK: Object
 @Reducer
-struct LogInForm {
+struct LoginForm {
     // MARK: state
     @ObservableState
     struct State {
