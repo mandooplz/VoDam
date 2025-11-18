@@ -20,7 +20,7 @@ struct VoDamView: View {
     // MARK: body
     var body: some View {
         TabView {
-            Text("MyHomeView입니다.")
+            MyHomeView(store.scope(state: \.myHome, action: \.myHome))
                 .tabItem {
                     Label("홈", systemImage: "house")
                 }
@@ -39,6 +39,8 @@ struct VoDamView: View {
     }
 }
 
+
+// MARK: Preview
 #Preview {
     VoDamView(
         Store(
