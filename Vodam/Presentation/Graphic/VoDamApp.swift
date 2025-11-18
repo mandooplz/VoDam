@@ -12,9 +12,9 @@ struct VodamApp: App {
         WindowGroup {
             VoDamView(
                 store: Store(
-                    initialState: VoDam.State(),
+                    initialState: MyHome.State(),
                     reducer: {
-                        VoDam()
+                        MyHome()
                     }
                 )
             )

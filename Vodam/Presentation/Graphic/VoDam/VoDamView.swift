@@ -11,7 +11,7 @@ import ComposableArchitecture
 // MARK: view
 struct VoDamView: View {
     // MARK: model
-    @State var store: StoreOf<VoDam>
+    @Bindable var store: StoreOf<MyHome>
     
     
     // MARK: body
@@ -64,8 +64,8 @@ struct VoDamView: View {
 
 #Preview {
     VoDamView(
-        store: Store(initialState: VoDam.State()) {
-            VoDam()
+        store: Store(initialState: MyHome.State()) {
+            MyHome()
         }
     )
 }

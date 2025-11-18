@@ -14,9 +14,11 @@ struct VoDam {
     // MARK: state
     @ObservableState
     struct State {
-        var myHome: MyHome.State
-        var chatBoard: ChatBoard.State
-        var projectBoard: ProjectBoard.State
+        var myHome = MyHome.State()
+        var chatBoard = ChatBoard.State()
+        var projectBoard = ProjectBoard.State()
+        
+        var isLoggedIn: Bool = false
     }
     
     
