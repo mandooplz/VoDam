@@ -59,3 +59,13 @@ struct VoDamView: View {
         }
     }
 }
+
+
+
+#Preview {
+    VoDamView(
+        store: Store(initialState: VoDam.State()) {
+            VoDam()
+        }
+    )
+}
