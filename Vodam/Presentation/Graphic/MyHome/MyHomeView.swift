@@ -1,5 +1,5 @@
 //
-//  VoDamView.swift
+//  MyHomeView.swift
 //  Vodam
 //
 //  Created by 김민우 on 11/17/25.
@@ -9,7 +9,7 @@ import ComposableArchitecture
 
 
 // MARK: view
-struct VoDamView: View {
+struct MyHomeView: View {
     // MARK: model
     @Bindable var store: StoreOf<MyHome>
     
@@ -63,7 +63,7 @@ struct VoDamView: View {
 
 
 #Preview {
-    VoDamView(
+    MyHomeView(
         store: Store(initialState: MyHome.State()) {
             MyHome()
         }

@@ -6,11 +6,16 @@
 //
 import ComposableArchitecture
 import Foundation
+import OSLog
 
 
 // MARK: Object
 @Reducer
 struct MyHome {
+    // MARK: core
+    private nonisolated let logger = Logger(subsystem: "VoDam.MyHome", category: "Domain")
+    
+    
     // MARK: state
     @ObservableState
     struct State {
@@ -44,6 +49,7 @@ struct MyHome {
                 state.destination = nil
                 return .none
             default:
+                logger.info("MyHome의 어떤 액션이 실행되었습니다.")
                 return .none
             }
         }.ifLet(\.$destination, action: \.destination)
