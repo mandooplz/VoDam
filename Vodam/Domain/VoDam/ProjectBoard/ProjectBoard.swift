@@ -15,6 +15,7 @@ struct ProjectBoard {
     // MARK: core
     nonisolated let logger = Logger(subsystem: "VoDam.ProjectBoard", category: "Domain")
     
+    
     // MARK: state
     @ObservableState
     struct State {
@@ -36,7 +37,7 @@ struct ProjectBoard {
                 return .none
             }
         }
-        // 3. 부모(ProjectBoard)와 자식(Project) 리듀서 연결
+        // 부모(ProjectBoard)와 자식(Project) 리듀서 연결
         .forEach(\.projects, action: \.project) {
             Project()
         }

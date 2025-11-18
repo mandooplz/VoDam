@@ -11,13 +11,16 @@ import ComposableArchitecture
 // MARK: Object
 @Reducer
 struct ChatBoard {
-    // MARK: core
-    
-    
-    
     // MARK: state
+    @Reducer
+    struct State {
+        
+    }
     
     
     // MARK: action
+    enum Action {
+        
+    }
 }
 

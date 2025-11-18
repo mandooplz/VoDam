@@ -20,4 +20,13 @@ struct Project {
     
     
     // MARK: action
+    enum Action {
+        
+    }
+    
+    var body: some Reducer<State, Action> {
+        Reduce { state, action in
+            return .none
+        }
+    }
 }

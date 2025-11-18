@@ -14,38 +14,21 @@ struct VoDam {
     // MARK: state
     @ObservableState
     struct State {
-        @Presents var destination: Destination.State?
-    }
-    
-    @Reducer
-    enum Destination {
-        case loginInfo(LoginInfo)
-        case loginForm(LoginForm)
+        var myHome: MyHome.State
+        var chatBoard: ChatBoard.State
+        var projectBoard: ProjectBoard.State
     }
     
     
     // MARK: action
     enum Action {
-        case destination(PresentationAction<Destination.Action>)
-        case showLoginInfo
+        
     }
     
     var body: some Reducer<State, Action> {
         Reduce { state, action in
-            switch action {
-            case .showLoginInfo:
-                state.destination = .loginInfo(.init())
-                return .none
-            case .destination(.presented(.loginInfo(.goToLogin))):
-                state.destination = .loginForm(.init())
-                return .none
-            case .destination(.presented(.loginInfo(.closeInfo))):
-                state.destination = nil
-                return .none
-            default:
-                return .none
-            }
-        }.ifLet(\.$destination, action: \.destination)
+            return .none
+        }
     }
 }
 
