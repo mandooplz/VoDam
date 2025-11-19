@@ -8,6 +8,7 @@ import Foundation
 import KakaoSDKAuth
 import KakaoSDKCommon
 import KakaoSDKUser
+import OSLog
 
 
 // MARK: Object
@@ -15,13 +16,20 @@ import KakaoSDKUser
 final class KakaoManager {
     // MARK: core
     private static let nativeKey = "64d7647b1174837fca072d9135ba98ea"
+    static let shared = KakaoManager()
     init() {
         KakaoSDK.initSDK(appKey: Self.nativeKey)
     }
     
     
     // MARK: state
-    private(set) var isKakaoAppExist: Bool? = nil
+    nonisolated let logger = Logger(subsystem: "VoDam.KakaoManager", category: "Presentation")
+    
+    private(set) var loginAvailable: Bool? = nil
+    private(set) var oauthToken: OAuthToken? = nil
+    
+    private(set) var profileNickName: String? = nil
+    private(set) var profileImage: URL? = nil
     
     
     // MARK: action
@@ -30,22 +38,64 @@ final class KakaoManager {
         let kakaoLoginAvaiaiable = UserApi.isKakaoTalkLoginAvailable()
         
         // mutate
-        self.isKakaoAppExist = kakaoLoginAvaiaiable
+        self.loginAvailable = kakaoLoginAvaiaiable
     }
     
-    func loginWithKakao() async throws {
-        // 카카오톡 실행 가능 여부 확인
-        if (UserApi.isKakaoTalkLoginAvailable()) {
-            UserApi.shared.loginWithKakaoTalk {(oauthToken, error) in
+    func loginWithKakao() async {
+        // capture
+        guard loginAvailable != nil else {
+            logger.error("checkLoginCapability를 실행하지 않고 loginWithKakao를 시도했습니다.")
+            return
+        }
+        guard loginAvailable == true else {
+            logger.error("외부 문제로 인해 KakaoLogin이 불가한 상태입니다.")
+            return
+        }
+        
+        // process
+        let authToken = await withCheckedContinuation { [weak self] continuation in
+            UserApi.shared.loginWithKakaoTalk { oauthToken, error in
                 if let error = error {
-                    print(error)
-                }
-                else {
+                    self?.logger.error("\(error)")
+                } else {
                     print("loginWithKakaoTalk() success.")
 
                     // 성공 시 동작 구현
-                    _ = oauthToken
+                    continuation.resume(returning: oauthToken)
                 }
+            }
+        }
+        
+        // mutate
+        self.oauthToken = authToken
+    }
+    
+    func loginWithKakaoAccount() async {
+        // capture
+        guard loginAvailable != nil else {
+            logger.error("checkLoginCapability를 실행하지 않고 loginWithKakao를 시도했습니다.")
+            return
+        }
+        guard loginAvailable == true else {
+            logger.error("외부 문제로 인해 KakaoLogin이 불가한 상태입니다.")
+            return
+        }
+        
+        // process
+    }
+    
+    func fetchUserDatas() async {
+        // capture
+        guard let token = self.oauthToken else {
+            logger.error("현재 oauthToken이 nil입니다. 로그인을 먼저 시도하세요")
+            return
+        }
+        
+        // process
+        UserApi.shared.me { [weak self] user, error in
+            guard let error = error else {
+                self?.logger.error("\(error)")
+                return
             }
         }
     }
