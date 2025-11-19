@@ -53,7 +53,25 @@ final class KakaoManager {
         }
         
         // process
-        let authToken: OAuthToken? = nil
+        let authToken: OAuthToken? = await withCheckedContinuation { [weak self] continuation in
+            UserApi.shared.loginWithKakaoTalk {(oauthToken, error) in
+                guard error != nil else {
+                    self?.logger.error("\(error!)")
+                    continuation.resume(returning: nil)
+                    return
+                }
+                
+                guard let oauthToken else {
+                    self?.logger.error("OauthToken이 nil입니다.")
+                    continuation.resume(returning: nil)
+                    return
+                }
+
+                
+                self?.logger.debug("카카오톡으로 로그인 성공했습니다.")
+                continuation.resume(returning: oauthToken)
+            }
+        }
         
         // mutate
         self.oauthToken = authToken
@@ -71,7 +89,24 @@ final class KakaoManager {
         }
         
         // process
-        let authToken: OAuthToken? = nil
+        let authToken: OAuthToken? = await withCheckedContinuation { continuation in
+            UserApi.shared.loginWithKakaoAccount { [weak self] oauthToken, error in
+                guard error != nil else {
+                    self?.logger.error("\(error!)")
+                    continuation.resume(returning: nil)
+                    return
+                }
+                
+                guard let oauthToken else {
+                    self?.logger.error("OauthToken이 nil입니다.")
+                    continuation.resume(returning: nil)
+                    return
+                }
+                    
+                self?.logger.debug("카카오계정으로 로그인 성공했습니다.")
+                continuation.resume(returning: oauthToken)
+            }
+        }
         
         // mutate
         self.oauthToken = authToken
