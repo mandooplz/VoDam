@@ -15,10 +15,14 @@ import OSLog
 @MainActor @Observable
 final class KakaoManager: Sendable {
     // MARK: core
-    private static let nativeKey = "64d7647b1174837fca072d9135ba98ea"
     static let shared = KakaoManager()
     init() {
-        KakaoSDK.initSDK(appKey: Self.nativeKey)
+        guard let token = Bundle.main.object(forInfoDictionaryKey: "KAKAO_LOGIN_TOKEN") as? String,
+              !token.isEmpty else {
+            fatalError("KAKAO_LOGIN_TOKEN이 Info.plist에 설정되지 않았습니다. Secrets.xcconfig의 TOKEN 값을 Info.plist에 추가해주세요.")
+        }
+        
+        KakaoSDK.initSDK(appKey: token)
     }
     
     
