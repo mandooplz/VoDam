@@ -68,15 +68,8 @@ struct LoginFormView: View {
                         )
                 }
                 
-                Button {
-                    Task {
-                        let kakaoManager = KakaoManager.shared
-                        
-                        kakaoManager.checkLoginCapability()
-                        await kakaoManager.loginWithKakao()
-                        
-                    }
-                } label: {
+                Button(action: loginWithKakao)
+                {
                     Text("Sign in with KaKao")
                         .frame(maxWidth: .infinity)
                         .padding()
@@ -90,6 +83,20 @@ struct LoginFormView: View {
         }
         .navigationTitle("로그인")
         .navigationBarTitleDisplayMode(.inline)
+    }
+    
+    
+    // MARK: flow
+    private func loginWithKakao() {
+        Task {
+            let kakaoManager = KakaoManager.shared
+            
+            kakaoManager.checkLoginCapability()
+            await kakaoManager.loginWithKakao()
+            await kakaoManager.loginWithKakaoAccount()
+            
+            await kakaoManager.fetchUserData()
+        }
     }
 }
 
