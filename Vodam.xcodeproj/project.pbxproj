@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		7D5C88942ECAAC3400977C6E /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 7D5C88932ECAAC3400977C6E /* ComposableArchitecture */; };
+		CE4E02502ECE287E00B6E5E6 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = CE4E024E2ECE287E00B6E5E6 /* Secrets.xcconfig */; };
+		CE4E02512ECE287E00B6E5E6 /* Secrets.xcconfig.example in Resources */ = {isa = PBXBuildFile; fileRef = CE4E024F2ECE287E00B6E5E6 /* Secrets.xcconfig.example */; };
 		CE8E28302ECE15FE00F63468 /* KakaoSDK in Frameworks */ = {isa = PBXBuildFile; productRef = CE8E282F2ECE15FE00F63468 /* KakaoSDK */; };
 		CE8E28322ECE15FE00F63468 /* KakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = CE8E28312ECE15FE00F63468 /* KakaoSDKAuth */; };
 		CE8E28342ECE15FE00F63468 /* KakaoSDKCert in Frameworks */ = {isa = PBXBuildFile; productRef = CE8E28332ECE15FE00F63468 /* KakaoSDKCert */; };
@@ -17,6 +19,8 @@
 
 /* Begin PBXFileReference section */
 		8B4C67C32EBC8481003C67F9 /* Vodam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vodam.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE4E024E2ECE287E00B6E5E6 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
+		CE4E024F2ECE287E00B6E5E6 /* Secrets.xcconfig.example */ = {isa = PBXFileReference; lastKnownFileType = text; path = Secrets.xcconfig.example; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -60,6 +64,8 @@
 		8B4C67BA2EBC8481003C67F9 = {
 			isa = PBXGroup;
 			children = (
+				CE4E024E2ECE287E00B6E5E6 /* Secrets.xcconfig */,
+				CE4E024F2ECE287E00B6E5E6 /* Secrets.xcconfig.example */,
 				8B4C67C52EBC8481003C67F9 /* Vodam */,
 				8B4C67C42EBC8481003C67F9 /* Products */,
 			);
@@ -147,6 +153,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE4E02502ECE287E00B6E5E6 /* Secrets.xcconfig in Resources */,
+				CE4E02512ECE287E00B6E5E6 /* Secrets.xcconfig.example in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -165,6 +173,7 @@
 /* Begin XCBuildConfiguration section */
 		8B4C67CC2EBC8482003C67F9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CE4E024E2ECE287E00B6E5E6 /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -230,6 +239,7 @@
 		};
 		8B4C67CD2EBC8482003C67F9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CE4E024E2ECE287E00B6E5E6 /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
