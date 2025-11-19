@@ -12,11 +12,28 @@ import SwiftUI
 struct LoginFormView: View {
     // MARK: model
     let store: StoreOf<LoginForm>
+    init(_ store: StoreOf<LoginForm>) {
+        self.store = store
+    }
     
     
     // MARK: body
     var body: some View {
         VStack(spacing: 24) {
+            HStack {
+                Spacer()
+                Button {
+                    store.send(.closeForm)
+                } label: {
+                    Image(systemName: "xmark")
+                        .foregroundColor(.gray)
+                        .frame(width: 28, height: 28)
+                        .background(Color(.systemGray5))
+                        .clipShape(Circle())
+                }
+                .padding(16)
+            }
+            
             Text("Vodam")
                 .font(.title)
                 .fontWeight(.bold)
@@ -26,7 +43,7 @@ struct LoginFormView: View {
             
             VStack(spacing: 16) {
                 Button {
-                    store.send(.appleTapped)
+                    
                 } label: {
                     Text("Sign in with Apple")
                         .fontWeight(.semibold)
@@ -38,7 +55,7 @@ struct LoginFormView: View {
                 }
                 
                 Button {
-                    store.send(.googleTapped)
+                    
                 } label: {
                     Text("Sign in with Google")
                         .frame(maxWidth: .infinity)
@@ -50,7 +67,7 @@ struct LoginFormView: View {
                 }
                 
                 Button {
-                    store.send(.kakaoTapped)
+                    
                 } label: {
                     Text("Sign in with KaKao")
                         .frame(maxWidth: .infinity)
@@ -66,4 +83,17 @@ struct LoginFormView: View {
         .navigationTitle("로그인")
         .navigationBarTitleDisplayMode(.inline)
     }
+}
+
+
+// MARK: Priview
+#Preview {
+    LoginFormView(
+        Store(
+            initialState: LoginForm.State(),
+            reducer: {
+                LoginForm()
+            }
+        )
+    )
 }

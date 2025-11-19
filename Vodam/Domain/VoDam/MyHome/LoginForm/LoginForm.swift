@@ -18,28 +18,29 @@ struct LoginForm {
     // MARK: state
     @ObservableState
     struct State {
-        
+        var nickname: String? = nil
+        var imageURL: URL? = nil
     }
     
     
     // MARK: action
     enum Action {
-        case appleTapped
-        case googleTapped
-        case kakaoTapped
+        case closeForm
+        case setNickname(String?)
+        case imageUrl(URL?)
     }
     
     var body: some Reducer<State, Action> {
         Reduce { state, action in
             switch action {
-            case .appleTapped:
-                logger.info("appleTapped 액션이 호출되었습니다.")
+            case .closeForm:
+                logger.info("closeForm 액션이 호출되었습니다.")
                 return .none
-            case .googleTapped:
-                logger.info("googleTapped 액션이 호출되었습니다.")
+            case .setNickname(let nickname):
+                state.nickname = nickname
                 return .none
-            case .kakaoTapped:
-                logger.info("kakaoTapped 액션이 호출되었습니다.")
+            case .imageUrl(let url):
+                state.imageURL = url
                 return .none
             }
         }

@@ -39,15 +39,24 @@ struct MyHomeView: View {
                 }
             }
             // navigationDestination
-            .navigationDestination(
+            .fullScreenCover(
                 item: $store.scope(
                     state: \.destination?.loginForm,
                     action: \.destination.loginForm
                 ),
-                destination: { store in
-                    LoginFormView(store: store)
+                content: { store in
+                    LoginFormView(store)
                 }
             )
+//            .navigationDestination(
+//                item: $store.scope(
+//                    state: \.destination?.loginForm,
+//                    action: \.destination.loginForm
+//                ),
+//                destination: { store in
+//                    LoginFormView(store: store)
+//                }
+//            )
             
             // sheet
             .sheet(

@@ -30,7 +30,7 @@ struct LoginInfoView: View {
                         .background(Color(.systemGray5))
                         .clipShape(Circle())
                 }
-                .padding(12)
+                .padding(16)
             }
             
             Spacer()

@@ -48,6 +48,9 @@ struct MyHome {
             case .destination(.presented(.loginInfo(.closeInfo))):
                 state.destination = nil
                 return .none
+            case .destination(.presented(.loginForm(.closeForm))):
+                state.destination = nil
+                return .none
             default:
                 logger.info("MyHome의 어떤 액션이 실행되었습니다.")
                 return .none
