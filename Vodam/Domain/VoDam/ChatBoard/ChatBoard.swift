@@ -1,8 +1,8 @@
 //
-//  LogInForm.swift
+//  ChatBoard.swift
 //  Vodam
 //
-//  Created by 김민우 on 11/17/25.
+//  Created by 김민우 on 11/18/25.
 //
 import Foundation
 import ComposableArchitecture
@@ -10,9 +10,9 @@ import ComposableArchitecture
 
 // MARK: Object
 @Reducer
-struct LoginForm {
+struct ChatBoard {
     // MARK: state
-    @ObservableState
+    @Reducer
     struct State {
         
     }
@@ -20,8 +20,7 @@ struct LoginForm {
     
     // MARK: action
     enum Action {
-        case appleTapped
-        case googleTapped
-        case kakaoTapped
+        
     }
 }
+

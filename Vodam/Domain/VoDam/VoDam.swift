@@ -14,38 +14,43 @@ struct VoDam {
     // MARK: state
     @ObservableState
     struct State {
-        @Presents var destination: Destination.State?
-    }
-    
-    @Reducer
-    enum Destination {
-        case loginInfo(LoginInfo)
-        case loginForm(LoginForm)
+        var myHome = MyHome.State()
+        var projectBoard = ProjectBoard.State()
+        var chatBoard = ChatBoard.State()
+        
+        var isLoggedIn: Bool = false
     }
     
     
     // MARK: action
     enum Action {
-        case destination(PresentationAction<Destination.Action>)
-        case showLoginInfo
+        case myHome(MyHome.Action)
+        case projectBoard(ProjectBoard.Action)
+        case chatBoard(ChatBoard.Action)
     }
     
     var body: some Reducer<State, Action> {
+        // 자식 리듀서 연결
+        Scope(state: \.myHome, action: \.myHome) {
+            MyHome()
+        }
+        Scope(state: \.projectBoard, action: \.projectBoard) {
+            ProjectBoard()
+        }
+        Scope(state: \.chatBoard, action: \.chatBoard) {
+            ChatBoard()
+        }
+        
         Reduce { state, action in
             switch action {
-            case .showLoginInfo:
-                state.destination = .loginInfo(.init())
+            case .myHome:
                 return .none
-            case .destination(.presented(.loginInfo(.goToLogin))):
-                state.destination = .loginForm(.init())
+            case .projectBoard:
                 return .none
-            case .destination(.presented(.loginInfo(.closeInfo))):
-                state.destination = nil
-                return .none
-            default:
+            case .chatBoard:
                 return .none
             }
-        }.ifLet(\.$destination, action: \.destination)
+        }
     }
 }
 
