@@ -7,6 +7,7 @@
 import Foundation
 import KakaoSDKAuth
 import KakaoSDKCommon
+import KakaoSDKUser
 
 
 // MARK: Object
@@ -24,10 +25,28 @@ final class KakaoManager {
     
     
     // MARK: action
-    func checkKakaoAppExist() async throws {
+    func checkLoginCapability() {
+        // proccess
+        let kakaoLoginAvaiaiable = UserApi.isKakaoTalkLoginAvailable()
         
+        // mutate
+        self.isKakaoAppExist = kakaoLoginAvaiaiable
     }
+    
     func loginWithKakao() async throws {
-        
+        // 카카오톡 실행 가능 여부 확인
+        if (UserApi.isKakaoTalkLoginAvailable()) {
+            UserApi.shared.loginWithKakaoTalk {(oauthToken, error) in
+                if let error = error {
+                    print(error)
+                }
+                else {
+                    print("loginWithKakaoTalk() success.")
+
+                    // 성공 시 동작 구현
+                    _ = oauthToken
+                }
+            }
+        }
     }
 }
