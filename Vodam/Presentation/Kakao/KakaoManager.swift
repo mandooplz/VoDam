@@ -53,18 +53,7 @@ final class KakaoManager {
         }
         
         // process
-        let authToken = await withCheckedContinuation { [weak self] continuation in
-            UserApi.shared.loginWithKakaoTalk { oauthToken, error in
-                if let error = error {
-                    self?.logger.error("\(error)")
-                } else {
-                    print("loginWithKakaoTalk() success.")
-
-                    // 성공 시 동작 구현
-                    continuation.resume(returning: oauthToken)
-                }
-            }
-        }
+        let authToken: OAuthToken? = nil
         
         // mutate
         self.oauthToken = authToken
@@ -82,6 +71,10 @@ final class KakaoManager {
         }
         
         // process
+        let authToken: OAuthToken? = nil
+        
+        // mutate
+        self.oauthToken = authToken
     }
     
     func fetchUserDatas() async {
@@ -92,11 +85,8 @@ final class KakaoManager {
         }
         
         // process
-        UserApi.shared.me { [weak self] user, error in
-            guard let error = error else {
-                self?.logger.error("\(error)")
-                return
-            }
-        }
+        
+        
+        // mutate
     }
 }
