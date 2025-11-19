@@ -28,6 +28,7 @@ struct LoginForm {
         case closeForm
         case setNickname(String?)
         case imageUrl(URL?)
+        case submit
     }
     
     var body: some Reducer<State, Action> {
@@ -41,6 +42,8 @@ struct LoginForm {
                 return .none
             case .imageUrl(let url):
                 state.imageURL = url
+                return .none
+            case .submit:
                 return .none
             }
         }

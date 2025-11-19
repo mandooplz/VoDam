@@ -37,7 +37,6 @@ struct MyHome {
     
     var body: some Reducer<State, Action> {
         Reduce { state, action in
-         
             switch action {
             case .showLoginInfo:
                 state.destination = .loginInfo(.init())
