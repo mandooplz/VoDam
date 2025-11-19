@@ -3,6 +3,7 @@
 
 import SwiftUI
 import ComposableArchitecture
+import KakaoSDKAuth
 
 
 // MARK: App
@@ -18,6 +19,11 @@ struct VodamApp: App {
                     }
                 )
             )
+            .onOpenURL { url in
+                if (AuthApi.isKakaoTalkLoginUrl(url)) {
+                    AuthController.handleOpenUrl(url: url)
+                }
+            }
         }
     }
 }
