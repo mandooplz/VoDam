@@ -6,11 +6,13 @@
 //
 import ComposableArchitecture
 import SwiftUI
+import OSLog
 
 
 // MARK: View
 struct LoginFormView: View {
     // MARK: model
+    private let logger = Logger(subsystem: "VoDam.LoginForm", category: "Presentation")
     let store: StoreOf<LoginForm>
     init(_ store: StoreOf<LoginForm>) {
         self.store = store
@@ -43,7 +45,7 @@ struct LoginFormView: View {
             
             VStack(spacing: 16) {
                 Button {
-                    
+                    logger.debug("Apple 로그인 구현 예정입니다.")
                 } label: {
                     Text("Sign in with Apple")
                         .fontWeight(.semibold)
@@ -55,7 +57,7 @@ struct LoginFormView: View {
                 }
                 
                 Button {
-                    
+                    logger.debug("Google 로그인 구현 예정입니다.")
                 } label: {
                     Text("Sign in with Google")
                         .frame(maxWidth: .infinity)
@@ -67,7 +69,13 @@ struct LoginFormView: View {
                 }
                 
                 Button {
-                    
+                    Task {
+                        let kakaoManager = KakaoManager.shared
+                        
+                        kakaoManager.checkLoginCapability()
+                        await kakaoManager.loginWithKakao()
+                        
+                    }
                 } label: {
                     Text("Sign in with KaKao")
                         .frame(maxWidth: .infinity)

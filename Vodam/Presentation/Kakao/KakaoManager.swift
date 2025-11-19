@@ -16,7 +16,7 @@ import OSLog
 final class KakaoManager: Sendable {
     // MARK: core
     static let shared = KakaoManager()
-    init() {
+    private init() {
         guard let token = Bundle.main.object(forInfoDictionaryKey: "KAKAO_LOGIN_TOKEN") as? String,
               !token.isEmpty else {
             fatalError("KAKAO_LOGIN_TOKEN이 Info.plist에 설정되지 않았습니다. Secrets.xcconfig의 TOKEN 값을 Info.plist에 추가해주세요.")
@@ -31,6 +31,9 @@ final class KakaoManager: Sendable {
     
     private(set) var loginAvailable: Bool? = nil
     private(set) var oauthToken: OAuthToken? = nil
+    private var isLoggedIn: Bool {
+        self.oauthToken != nil
+    }
     
     private(set) var userInfo: UserInfo? = nil
     
@@ -52,6 +55,10 @@ final class KakaoManager: Sendable {
         }
         guard loginAvailable == true else {
             logger.error("외부 문제로 인해 KakaoLogin이 불가한 상태입니다.")
+            return
+        }
+        guard isLoggedIn == false else {
+            logger.error("이미 로그인된 상태입니다.")
             return
         }
         
@@ -88,6 +95,10 @@ final class KakaoManager: Sendable {
         }
         guard loginAvailable == true else {
             logger.error("외부 문제로 인해 KakaoLogin이 불가한 상태입니다.")
+            return
+        }
+        guard isLoggedIn == false else {
+            logger.error("이미 로그인된 상태입니다.")
             return
         }
         
@@ -150,6 +161,7 @@ final class KakaoManager: Sendable {
                 
                 self?.logger.debug("카카오에서 사용자 정보를 가져오는데 성공했습니다.")
                 let userInfo = UserInfo(nickname: nickname, image: imageURL)
+                continuation.resume(returning: userInfo)
             }
         }
         
